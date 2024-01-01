@@ -20,30 +20,32 @@ void solve()
     int n;
     cin>>n;
     vector<int>arr(n);
+    map<int,int>count;
     for(int i=0;i<n;i++){
         cin>>arr[i];
+        count[arr[i]]++;
     }
 
     map<int,vector<int>>table;
-    map<int,int>count;
-    for(int i=0;i<n;i++){
-        int m;
-        cin>>m;
+    int res=0,tableN,finalkEY;
+    cin>>tableN;
+    for(int i=0;i<tableN;i++){
+        int m,ans=0,keyVAL;
+        cin>>m>>keyVAL;
         for(int j=0;j<m;j++){
             int tableValue;
             cin>>tableValue;
             table[arr[i]].push_back(tableValue);
-            count[tableValue]++;
+            if(count[tableValue]){
+                ans++;
+            }
+        }
+        if(ans>res){
+            res=ans;finalkEY=keyVAL;
         }
     }
-    int ans=0,res=arr[0];
-    for(int i=0;i<n;i++){
-        if(count[arr[i]]>ans){
-            res=arr[i];
-            ans=count[arr[i]];
-        }
-    }
-    cout<<res<<"\n";
+    
+    cout<<finalkEY<<"\n";
 }
 
 int main()
